@@ -4,34 +4,44 @@
  * Date: 07/06/2020
 */
 
+#include <iomanip>
 #include <iostream>
-#include <cstring>
+#include <string>
 
 using namespace std;
 
-int GetRightDate(int a) // the function to
+/**
+ * The function to prevent negative hour, mins, seconds input.
+ */
+int GetRightDate(int a)
 {
-    cin.ignore(1024, '\n');
     cin >> a;
     while (a < 0)
     {
         cout << "your input is uncorrect! please check and re-put: " << endl;
         cin >> a;
     }
-
     return a;
 }
 
-int GetInHour(int &n)
+/**
+ * The function to get input of int time.
+ */
+void GetTime(int *array, int size)
 {
     cout << "Please intput the time you want to convert" << endl;
     cout << "Please intput hours:" << endl;
-    n = GetRightDate(n);
-
-    return n;
+    array[0] = GetRightDate(array[0]);
+    cout << "Please intput mins:" << endl;
+    array[1] = GetRightDate(array[1]);
+    cout << "Please intput seconds:" << endl;
+    array[2] = GetRightDate(array[2]);
 }
 
-string GetInAmPm()
+/**
+ * The function to get 12-hour nonation am or pm.
+ */
+string GetAmPm()
 {
     string am_pm;
     cout << "Please intput the time you want to convert am or pm:" << endl;
@@ -40,36 +50,58 @@ string GetInAmPm()
     return am_pm;
 }
 
+/**
+ * The function to convert time to 12-hour nonation.
+ */
 void TimeConvertTo12(int &n)
 {
-
     if (n > 12)
     {
-        n = n - 12;
-        cout << "the time you convert is  "
-             << "PM  " << n << " (12-hour notation)"
-             << endl;
+        n -= 12;
+        cout << "PM  ";
+    }
+    else if (n == 12)
+    {
+        cout << "PM  ";
     }
     else
     {
-        cout << "the time you convert is  "
-             << "AM  " << n << " (12-hour notation)"
-             << endl;
+        cout << "AM  ";
     }
 }
 
+/**
+ * The function to convert time to 12-hour nonation.
+ */
 void TimeConvertTo24(int &n, string str)
 {
 
     if (str == "am")
+    {
         ;
+    }
+    else if (n == 12)
+    {
+    }
     else
     {
         n += 12;
     }
-    cout << "the time you convert is  " << n << " (24-hour notation)" << endl;
 }
 
+/**
+ * The function to print result.
+ */
+void PrintResult(int *array, int size)
+{
+    cout << setfill('0') << setw(2) << array[0] << ":"
+         << setfill('0') << setw(2) << array[1] << ":"
+         << setfill('0') << setw(2) << array[2];
+}
+
+/**
+ * The function to print menu.
+ */
 void PrintMenu()
 {
     cout << "===============================================================" << endl;
@@ -84,9 +116,9 @@ void PrintMenu()
 
 int main()
 {
-    char command;
-    int hour;
-    string str;
+    char command; // char to get command
+    int array[3]; // array int to get hour, mins and second;
+    string str;   // string to get am or pm for 12-hour nonation
 
     do
     {
@@ -95,17 +127,24 @@ int main()
         switch (command)
         {
         case 'a':
-            str = GetInAmPm();
-            hour = GetInHour(hour);
-            TimeConvertTo24(hour, str);
+            str = GetAmPm();
+            GetTime(array, 3);
+            cout << "The time you convert is :" << endl;
+            TimeConvertTo24(array[0], str);
+            PrintResult(array, 3);
+            cout << "   (24-hour nonation)" << endl;
             break;
         case 'b':
-            hour = GetInHour(hour);
-            TimeConvertTo12(hour);
+            GetTime(array, 3);
+            cout << "The time you convert is :" << endl;
+            TimeConvertTo12(array[0]);
+            PrintResult(array, 3);
+            cout << "   (12-hour nonation)" << endl;
             break;
         default:
             break;
         }
+        cin.ignore(1024, '\n');
     } while (command != 'q');
     return 0;
 }
