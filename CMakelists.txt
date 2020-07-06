@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.18)  # CMake version check
+project(lab6)                        # Create project "simple_example"
+set(CMAKE_CXX_STANDARD 14)            # Enable c++14 standard
+
+
+add_executable(lab6 lab6.cpp)
