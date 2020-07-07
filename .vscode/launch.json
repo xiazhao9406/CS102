@@ -5,10 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "lab6",
+            "name": "lab6_3",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/lab6",
+            "program": "${workspaceFolder}/build/lab6_3",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

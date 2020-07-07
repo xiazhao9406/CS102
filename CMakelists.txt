@@ -4,3 +4,7 @@ set(CMAKE_CXX_STANDARD 14)            # Enable c++14 standard
 
 
 add_executable(lab6 lab6.cpp)
+
+add_executable(lab6second lab6second.cpp)
+
+add_executable(lab6_3 lab6_3.cpp)
